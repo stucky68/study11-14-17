@@ -1,36 +1,45 @@
-#include <gtest\gtest.h>
 #include <type_traits>
+#include <iostream>
+#include <vector>
 
-
-int Foo(int a, int b)
-{
-	if (a == 0 || b == 0)
-	{
-		throw "don't do that";
-	}
-	int c = a % b;
-	if (c == 0)
-		return b;
-	return Foo(b, c);
-}
-
-TEST(TestNullPtr, NullPtr)
+void testNullPtr()
 {
 	bool value = std::is_same<decltype(NULL), decltype(0)>::value;
-	EXPECT_TRUE(value);
+	std::cout << value << std::endl;
 
 	value = std::is_same<decltype(NULL), decltype((void *)0)>::value;
-	EXPECT_TRUE(value);
+	std::cout << value << std::endl;
 
 	value = std::is_same<decltype(NULL), std::nullptr_t>::value;
-
-	EXPECT_TRUE(value);
+	std::cout << value << std::endl;
 }
+
+constexpr int len() { return 5; }
+
+void testConstexpr()
+{
+	std::cout << len() << std::endl;
+}
+
+void testIf_Switch()
+{
+	std::vector<int> vec = { 1,2,3,4 };
+	if (const std::vector<int>::iterator iter = std::find(vec.begin(), vec.end(), 3);
+	iter != vec.end())
+	{
+		*iter = 4;
+		std::cout << *iter << std::endl;
+	}
+}
+
+
 
 int main(int argc, char **argv)
 {
-	testing::InitGoogleTest(&argc, argv);
-	RUN_ALL_TESTS();
+	testNullPtr();
+	testConstexpr();
+	testIf_Switch();
+
 	getchar();
 	return 0;
 }
