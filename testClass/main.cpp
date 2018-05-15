@@ -86,6 +86,10 @@ void testStructuredBinding()
 		std::cout << key.c_str() << ":" << value << std::endl;
 }
 
+void testFunc(int a, int b, int c)
+{
+	std::cout << a << b << std::endl;
+}
 
 int main()
 {
@@ -94,5 +98,6 @@ int main()
 	testFinal();
 	testStructuredBinding();
 	getchar();
+	
 	return 0;
 }

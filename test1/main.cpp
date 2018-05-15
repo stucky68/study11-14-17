@@ -180,6 +180,37 @@ void testFoldExpr()
 	std::cout << sum(1, 2, 3, 4, 5, 6, 7, 8, 9, 10) << std::endl;
 }
 
+class A
+{
+public:
+	A()
+	{
+		std::cout << "构造函数" << std::endl;
+	}
+	A(const A &a)
+	{
+		std::cout << "拷贝构造函数" << std::endl;
+	}
+	~A()
+	{
+		std::cout << "析构函数" << std::endl;
+	}
+};
+
+A getA(bool test)
+{
+	A a, b;
+	if (test)
+		return a;
+	else
+		return b;
+}
+
+void testRvalue1()
+{
+	A a = getA(false);
+}
+
 
 int main(int argc, char **argv)
 {
@@ -191,6 +222,7 @@ int main(int argc, char **argv)
 	testDecltype();
 	testRecTemplate();
 	testFoldExpr();
+	testRvalue1();
 
 	getchar();
 	return 0;
